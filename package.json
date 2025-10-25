@@ -1,0 +1,24 @@
+{
+  "name": "tiktok-tools",
+  "version": "2.0.0",
+  "description": "TikTok All-in-One Tools - Download, Trending, User Feed, Music Feed & Search",
+  "main": "index.js",
+  "engines": {
+    "node": "18.x"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "tiktok",
+    "downloader",
+    "trending",
+    "search",
+    "tikwm",
+    "no-watermark"
+  ],
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.0"
+  }
+}
