@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download TikTok - Video & Foto Tanpa Watermark</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700&family=Urbanist:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap");
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        *:focus {
+            outline: none !important;
+        }
+
+        body {
+            font-family: "Inter", "Space Grotesk", "DM Sans", "Nunito Sans", "Urbanist", "Poppins", sans-serif;
+            background: #000000;
+            background-image: 
+                linear-gradient(135deg, rgba(254, 44, 85, 0.03) 0%, rgba(26, 10, 10, 0.05) 50%, rgba(0, 0, 0, 0.03) 100%),
+                repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(254, 44, 85, 0.015) 40px, rgba(254, 44, 85, 0.015) 80px),
+                repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(254, 44, 85, 0.015) 40px, rgba(254, 44, 85, 0.015) 80px);
+            background-size: 100% 100%, 80px 80px, 80px 80px;
+            background-position: 0 0, 0 0, 0 0;
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 20px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+            background: linear-gradient(90deg, #fe2c55, #ff6b6b, #fe2c55);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(254, 44, 85, 0.5)); }
+            50% { filter: drop-shadow(0 0 20px rgba(254, 44, 85, 0.7)); }
+        }
+
+        .header p {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            padding: 12px 20px;
+            background: #1a1a1a;
+            border: 2px solid #2a2a2a;
+            border-radius: 10px;
+            color: #999;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            outline: none;
+            user-select: none;
+        }
+
+        .tab-btn:hover {
+            border-color: #fe2c55;
+            color: #fe2c55;
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #fe2c55, #ff4458);
+            border-color: #fe2c55;
+            color: white;
+            box-shadow: 0 0 20px rgba(254, 44, 85, 0.4);
+            transform: scale(1.02);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .input-section {
+            background: #1a1a1a;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(254, 44, 85, 0.1);
+            margin-bottom: 20px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #bbb;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            gap: 8px;
+        }
+
+        .input-wrapper input,
+        .input-wrapper select {
+            flex: 1;
+            padding: 14px;
+            background: #0d0d0d;
+            border: 2px solid #2a2a2a;
+            border-radius: 10px;
+            color: #e0e0e0;
+            font-size: 15px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            outline: none;
+        }
+
+        .input-wrapper input:focus,
+        .input-wrapper select:focus {
+            border-color: #fe2c55;
+            box-shadow: 0 0 0 3px rgba(254, 44, 85, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .btn-paste {
+            padding: 14px 18px;
+            background: #0d0d0d;
+            border: 2px solid #2a2a2a;
+            border-radius: 10px;
+            color: #e0e0e0;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            outline: none;
+            user-select: none;
+        }
+
+        .btn-paste:hover {
+            background: #fe2c55;
+            border-color: #fe2c55;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .btn-paste:active {
+            transform: scale(0.95);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #fe2c55, #ff4458);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            outline: none;
+            user-select: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #ff4458, #fe2c55);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(254, 44, 85, 0.5);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(254, 44, 85, 0.4);
+        }
+
+        .btn-primary:disabled {
+            background: #2a2a2a;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: #1a1a1a;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 3px solid #2a2a2a;
+            border-top: 3px solid #fe2c55;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: rgba(254, 44, 85, 0.1);
+            border: 2px solid #fe2c55;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+            display: none;
+        }
+
+        .error-message.active {
+            display: block;
+        }
+
+        .results {
+            display: none;
+        }
+
+        .results.active {
+            display: block;
+        }
+
+        .video-card {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .video-card:hover {
+            border-color: #fe2c55;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(254, 44, 85, 0.3);
+        }
+
+        .video-card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+
+        .video-card h4 {
+            color: #fff;
+            margin-bottom: 8px;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        .video-card .author {
+            color: #fe2c55;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .video-card .stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #888;
+            flex-wrap: wrap;
+        }
+
+        .video-card .stats span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 10px 16px;
+            background: #0d0d0d;
+            border: 2px solid #2a2a2a;
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            outline: none;
+            user-select: none;
+        }
+
+        .download-btn:hover {
+            background: #fe2c55;
+            border-color: #fe2c55;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(254, 44, 85, 0.3);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .photo-grid img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .photo-grid img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(254, 44, 85, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .tabs {
+                gap: 6px;
+            }
+            
+            .tab-btn {
+                padding: 10px 14px;
+                font-size: 13px;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="bi bi-tiktok"></i> Download TikTok</h1>
+            <p>Download Video/Foto Tanpa Watermark - Trending, User Feed & Search</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="download">
+                <i class="bi bi-download"></i> Download
+            </button>
+            <button class="tab-btn" data-tab="trending">
+                <i class="bi bi-fire"></i> Trending
+            </button>
+            <button class="tab-btn" data-tab="user">
+                <i class="bi bi-person"></i> User Feed
+            </button>
+            <button class="tab-btn" data-tab="music">
+                <i class="bi bi-music-note"></i> Music Feed
+            </button>
+            <button class="tab-btn" data-tab="search">
+                <i class="bi bi-search"></i> Search
+            </button>
+        </div>
+
+        <div class="tab-content active" id="download">
+            <div class="input-section">
+                <div class="input-group">
+                    <label>URL Video/Foto TikTok</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="download-url" placeholder="https://www.tiktok.com/@username/video/...">
+                        <button class="btn-paste" onclick="pasteClipboard('download-url')">
+                            <i class="bi bi-clipboard"></i>
+                        </button>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="downloadVideo()">
+                    <i class="bi bi-download"></i> Download
+                </button>
+            </div>
+        </div>
+
+        <div class="tab-content" id="trending">
+            <div class="input-section">
+                <div class="input-group">
+                    <label>Region / Negara</label>
+                    <div class="input-wrapper">
+                        <select id="trending-region">
+                            <option value="ID">Indonesia</option>
+                            <option value="US">United States</option>
+                            <option value="JP">Japan</option>
+                            <option value="KR">South Korea</option>
+                            <option value="TH">Thailand</option>
+                            <option value="VN">Vietnam</option>
+                            <option value="PH">Philippines</option>
+                            <option value="MY">Malaysia</option>
+                            <option value="SG">Singapore</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="getTrending()">
+                    <i class="bi bi-fire"></i> Lihat Trending
+                </button>
+            </div>
+        </div>
+
+        <div class="tab-content" id="user">
+            <div class="input-section">
+                <div class="input-group">
+                    <label>Username TikTok (tanpa @)</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="user-username" placeholder="username">
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="getUserFeed()">
+                    <i class="bi bi-person"></i> Lihat Video User
+                </button>
+            </div>
+        </div>
+
+        <div class="tab-content" id="music">
+            <div class="input-section">
+                <div class="input-group">
+                    <label>Music ID (dari URL musik TikTok)</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="music-id" placeholder="1234567890">
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="getMusicFeed()">
+                    <i class="bi bi-music-note"></i> Video dengan Musik Ini
+                </button>
+            </div>
+        </div>
+
+        <div class="tab-content" id="search">
+            <div class="input-section">
+                <div class="input-group">
+                    <label>Kata Kunci Pencarian</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="search-keyword" placeholder="Cari video, user...">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Tipe Pencarian</label>
+                    <div class="input-wrapper">
+                        <select id="search-type">
+                            <option value="video">Video</option>
+                            <option value="user">User</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="searchContent()">
+                    <i class="bi bi-search"></i> Cari
+                </button>
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Memuat data...</p>
+        </div>
+
+        <div class="error-message" id="error-message"></div>
+
+        <div class="results" id="results"></div>
+    </div>
+
+    <script>
+        let notificationAllowed = false;
+        let permissionAsked = false;
+
+        async function ensureNotificationPermission() {
+            if ('Notification' in window && !permissionAsked) {
+                permissionAsked = true;
+                try {
+                    if (Notification.permission === 'default') {
+                        const permission = await Notification.requestPermission();
+                        notificationAllowed = (permission === 'granted');
+                        return notificationAllowed;
+                    } else if (Notification.permission === 'granted') {
+                        notificationAllowed = true;
+                        return true;
+                    }
+                } catch (err) {
+                    console.log('Notification permission error:', err);
+                }
+            }
+            return notificationAllowed || Notification.permission === 'granted';
+        }
+
+        async function showNotification(title, message, icon = '🔔') {
+            if ('Notification' in window) {
+                if (Notification.permission === 'granted') {
+                    try {
+                        new Notification(icon + ' ' + title, {
+                            body: message,
+                            icon: 'https://www.tiktok.com/favicon.ico',
+                            badge: 'https://www.tiktok.com/favicon.ico',
+                            tag: 'tiktok-tools',
+                            requireInteraction: false,
+                            silent: false
+                        });
+                    } catch (err) {
+                        console.log('Notification error:', err);
+                    }
+                } else if (Notification.permission === 'default' && !permissionAsked) {
+                    await ensureNotificationPermission();
+                    if (Notification.permission === 'granted') {
+                        showNotification(title, message, icon);
+                    }
+                }
+            }
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+            
+            hideAll();
+        }
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchTab(btn.dataset.tab);
+            });
+        });
+
+        async function pasteClipboard(inputId) {
+            try {
+                const text = await navigator.clipboard.readText();
+                document.getElementById(inputId).value = text;
+                showNotification('Berhasil!', 'URL berhasil ditempel dari clipboard', '📋');
+            } catch (err) {
+                showError('Gagal mengakses clipboard');
+            }
+        }
+
+        function showLoading() {
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('error-message').classList.remove('active');
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').classList.remove('active');
+        }
+
+        function showError(message) {
+            const errorEl = document.getElementById('error-message');
+            errorEl.textContent = message;
+            errorEl.classList.add('active');
+            setTimeout(() => errorEl.classList.remove('active'), 5000);
+        }
+
+        function hideAll() {
+            document.getElementById('loading').classList.remove('active');
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('error-message').classList.remove('active');
+        }
+
+        function formatNumber(num) {
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num;
+        }
+
+        async function downloadVideo() {
+            const url = document.getElementById('download-url').value.trim();
+            if (!url) {
+                showError('Masukkan URL TikTok');
+                showNotification('Error', 'Masukkan URL TikTok terlebih dahulu', '❌');
+                return;
+            }
+
+            showLoading();
+            showNotification('Download Dimulai', 'Sedang mengambil data dari TikTok...', '⬇️');
+
+            try {
+                const response = await fetch('/api/download', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
+                });
+
+                const data = await response.json();
+                hideLoading();
+
+                if (!data.success) {
+                    showError(data.error);
+                    showNotification('Download Gagal', data.error, '❌');
+                    return;
+                }
+
+                const resultsEl = document.getElementById('results');
+                const videoData = data.data;
+
+                let html = `<div class="video-card">`;
+                html += `<img src="${videoData.cover}" alt="Cover">`;
+                html += `<div class="author"><i class="bi bi-person-circle"></i> ${videoData.author.nickname}</div>`;
+                html += `<h4>${videoData.title}</h4>`;
+                
+                if (data.type === 'photo' && videoData.images) {
+                    html += `<div class="photo-grid">`;
+                    videoData.images.forEach(img => {
+                        html += `<img src="${img}" alt="Photo" onclick="window.open('${img}', '_blank')">`;
+                    });
+                    html += `</div>`;
+                    html += `<div class="download-buttons">`;
+                    html += `<a href="${videoData.music}" class="download-btn" target="_blank"><i class="bi bi-music-note"></i> Music</a>`;
+                    html += `</div>`;
+                } else {
+                    html += `<div class="stats">`;
+                    html += `<span><i class="bi bi-play-circle"></i> ${formatNumber(videoData.statistics.play_count)}</span>`;
+                    html += `<span><i class="bi bi-heart"></i> ${formatNumber(videoData.statistics.digg_count)}</span>`;
+                    html += `<span><i class="bi bi-chat"></i> ${formatNumber(videoData.statistics.comment_count)}</span>`;
+                    html += `<span><i class="bi bi-share"></i> ${formatNumber(videoData.statistics.share_count)}</span>`;
+                    html += `</div>`;
+                    html += `<div class="download-buttons">`;
+                    if (videoData.play) html += `<a href="${videoData.play}" class="download-btn" target="_blank"><i class="bi bi-download"></i> No WM</a>`;
+                    if (videoData.hdplay) html += `<a href="${videoData.hdplay}" class="download-btn" target="_blank"><i class="bi bi-download"></i> HD</a>`;
+                    if (videoData.music) html += `<a href="${videoData.music}" class="download-btn" target="_blank"><i class="bi bi-music-note"></i> Music</a>`;
+                    html += `</div>`;
+                }
+                
+                html += `</div>`;
+
+                resultsEl.innerHTML = html;
+                resultsEl.classList.add('active');
+                
+                showNotification('Download Berhasil!', data.type === 'photo' ? 'Foto slideshow berhasil diproses!' : 'Video berhasil diproses! Klik tombol download untuk menyimpan.', '✅');
+
+            } catch (error) {
+                hideLoading();
+                showError('Gagal mengambil data: ' + error.message);
+                showNotification('Error', 'Gagal mengambil data dari server', '❌');
+            }
+        }
+
+        async function getTrending() {
+            const region = document.getElementById('trending-region').value;
+            showLoading();
+            showNotification('Trending', `Mencari video trending dari ${region}...`, '🔥');
+
+            try {
+                const response = await fetch(`/api/trending?region=${region}&count=20`);
+                const data = await response.json();
+                hideLoading();
+
+                if (!data.success) {
+                    showError(data.error);
+                    showNotification('Error', data.error, '❌');
+                    return;
+                }
+
+                displayVideoGrid(data.data);
+                showNotification('Berhasil!', `${data.data.length} video trending dari ${region} berhasil dimuat!`, '✅');
+
+            } catch (error) {
+                hideLoading();
+                showError('Gagal mengambil trending: ' + error.message);
+                showNotification('Error', 'Gagal mengambil trending feed', '❌');
+            }
+        }
+
+        async function getUserFeed() {
+            const username = document.getElementById('user-username').value.trim().replace('@', '');
+            if (!username) {
+                showError('Masukkan username');
+                showNotification('Error', 'Masukkan username terlebih dahulu', '❌');
+                return;
+            }
+
+            showLoading();
+            showNotification('User Feed', `Mencari video dari @${username}...`, '👤');
+
+            try {
+                const response = await fetch(`/api/user/${username}?count=20`);
+                const data = await response.json();
+                hideLoading();
+
+                if (!data.success) {
+                    showError(data.error);
+                    showNotification('Error', data.error, '❌');
+                    return;
+                }
+
+                displayVideoGrid(data.data);
+                showNotification('Berhasil!', `${data.data.length} video dari @${username} berhasil dimuat!`, '✅');
+
+            } catch (error) {
+                hideLoading();
+                showError('Gagal mengambil user feed: ' + error.message);
+                showNotification('Error', 'Gagal mengambil user feed', '❌');
+            }
+        }
+
+        async function getMusicFeed() {
+            const musicId = document.getElementById('music-id').value.trim();
+            if (!musicId) {
+                showError('Masukkan Music ID');
+                showNotification('Error', 'Masukkan Music ID terlebih dahulu', '❌');
+                return;
+            }
+
+            showLoading();
+            showNotification('Music Feed', 'Mencari video dengan musik ini...', '🎵');
+
+            try {
+                const response = await fetch(`/api/music/${musicId}?count=20`);
+                const data = await response.json();
+                hideLoading();
+
+                if (!data.success) {
+                    showError(data.error);
+                    showNotification('Error', data.error, '❌');
+                    return;
+                }
+
+                displayVideoGrid(data.data);
+                showNotification('Berhasil!', `${data.data.length} video dengan musik ini berhasil dimuat!`, '✅');
+
+            } catch (error) {
+                hideLoading();
+                showError('Gagal mengambil music feed: ' + error.message);
+                showNotification('Error', 'Gagal mengambil music feed', '❌');
+            }
+        }
+
+        async function searchContent() {
+            const keyword = document.getElementById('search-keyword').value.trim();
+            const type = document.getElementById('search-type').value;
+
+            if (!keyword) {
+                showError('Masukkan kata kunci');
+                showNotification('Error', 'Masukkan kata kunci pencarian', '❌');
+                return;
+            }
+
+            showLoading();
+            showNotification('Searching', `Mencari "${keyword}"...`, '🔍');
+
+            try {
+                const response = await fetch(`/api/search?keyword=${encodeURIComponent(keyword)}&type=${type}&count=20`);
+                const data = await response.json();
+                hideLoading();
+
+                if (!data.success) {
+                    showError(data.error);
+                    showNotification('Error', data.error, '❌');
+                    return;
+                }
+
+                displayVideoGrid(data.data);
+                showNotification('Berhasil!', `${data.data.length} hasil pencarian "${keyword}" berhasil dimuat!`, '✅');
+
+            } catch (error) {
+                hideLoading();
+                showError('Gagal mencari: ' + error.message);
+                showNotification('Error', 'Gagal melakukan pencarian', '❌');
+            }
+        }
+
+        function displayVideoGrid(videos) {
+            const resultsEl = document.getElementById('results');
+            
+            if (!videos || videos.length === 0) {
+                resultsEl.innerHTML = '<div class="video-card"><p style="text-align:center;color:#888;">Tidak ada data</p></div>';
+                resultsEl.classList.add('active');
+                return;
+            }
+
+            let html = '<div class="grid-2">';
+            
+            videos.forEach(video => {
+                html += `<div class="video-card">`;
+                html += `<img src="${video.cover || video.origin_cover}" alt="Cover">`;
+                html += `<div class="author"><i class="bi bi-person-circle"></i> ${video.author?.nickname || 'User'}</div>`;
+                html += `<h4>${(video.title || '').substring(0, 60)}${(video.title || '').length > 60 ? '...' : ''}</h4>`;
+                html += `<div class="stats">`;
+                html += `<span><i class="bi bi-play-circle"></i> ${formatNumber(video.play_count || 0)}</span>`;
+                html += `<span><i class="bi bi-heart"></i> ${formatNumber(video.digg_count || 0)}</span>`;
+                html += `</div>`;
+                html += `<div class="download-buttons">`;
+                if (video.play) html += `<a href="${video.play}" class="download-btn" target="_blank"><i class="bi bi-download"></i> Download</a>`;
+                if (video.hdplay) html += `<a href="${video.hdplay}" class="download-btn" target="_blank"><i class="bi bi-download"></i> HD</a>`;
+                html += `</div>`;
+                html += `</div>`;
+            });
+            
+            html += '</div>';
+
+            resultsEl.innerHTML = html;
+            resultsEl.classList.add('active');
+        }
+
+        document.getElementById('download-url').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') downloadVideo();
+        });
+
+        document.getElementById('user-username').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') getUserFeed();
+        });
+
+        document.getElementById('music-id').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') getMusicFeed();
+        });
+
+        document.getElementById('search-keyword').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') searchContent();
+        });
+    </script>
+</body>
+</html>
